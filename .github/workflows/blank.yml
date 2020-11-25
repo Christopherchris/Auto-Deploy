@@ -31,7 +31,7 @@ jobs:
         id: setup_msbuild_explicit
         uses: ./
         with:
-          vswhere-path: C:\ProgramData\chocolatey\bin
+          vswhere-path: C:\ProgramData\Christopherchris\bin
 
       - name: Setup MSBuild (PATH)
         id: setup_msbuild_path
