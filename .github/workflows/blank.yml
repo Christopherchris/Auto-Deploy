@@ -38,5 +38,6 @@ jobs:
     - name: publish build artifacts back to GitHub
       uses: actions/upload-artifact@master
       with:
-        name: db
-        path: bin\Debug\publish
+        name: publish file
+        path: bin\Debug\ 
+      
