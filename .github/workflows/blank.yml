@@ -27,11 +27,30 @@ jobs:
         run: Install-Module 7Zip4PowerShell -Force -Verbose
       - uses: actions/checkout@v2
       
-      - name: Build Binary
-        shell: cmd
+      - name: Setup MSBuild (vswhere-path)
+        id: setup_msbuild_explicit
+        uses: ./
+        with:
+          vswhere-path: C:\ProgramData\chocolatey\bin
+
+      - name: Setup MSBuild (PATH)
+        id: setup_msbuild_path
+        uses: ./
+
+      - name: Setup MSBuild (fallback)
+        id: setup_msbuild_fallback
+        uses: ./
+        env:
+          PATH: ''
+
+      - name: echo msbuild path
         run: |
-           cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
-           .\MSBuild.exe $Env:GITHUB_WORKSPACE\pathtoyoursolutionorproject
+          echo "vswhere-path: ${{ steps.setup_msbuild_explicit.outputs.msbuildPath }}"
+          echo "PATH: ${{ steps.setup_msbuild_path.outputs.msbuildPath }}"
+          echo "Fallback: ${{ steps.setup_msbuild_fallback.outputs.msbuildPath }}"
+      - name: echo MSBuild
+        run: msbuild -version
+           
       - name: Build Artifact
         shell: cmd
         run: .\ArtifactBuild.cmd
