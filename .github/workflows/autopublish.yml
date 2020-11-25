@@ -25,12 +25,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v1
 
-      # Runs a single command using the runners shell      
-     
-      - name: Restore NuGet Packages
-        run: nuget restore Auto Deploy.sln
+      # Runs a single command using the runners shell    
+      
  
-      - name: Build and Publish Web App
+      - name: Build and Publish Windows App
         run: msbuild Auto Deploy.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
  
       - name: Upload Artifact
