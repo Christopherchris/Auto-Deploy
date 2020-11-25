@@ -31,10 +31,7 @@ jobs:
         run: |
           echo "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\bin\MSBuild.exe Auto_Deploy.sln"
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
-           
-      - name: Build Artifact
-        shell: cmd
-        run: .\ArtifactBuild.cmd
+ 
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
